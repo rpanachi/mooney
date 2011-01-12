@@ -1,0 +1,19 @@
+  <tr id="entry-<%= entry.new_record? ? 'new' : entry.id %>" class="editable <%= cycle("odd", "even") %>">
+    <td>&nbsp;</td>
+    <td><%= text_field_tag "entry[date]", to_date(entry.date) || to_date(@date), :alt => "date", :class => "date #{'error' if entry.errors[:date]}", :title => entry.errors[:date] %></td>
+    <td><%= text_field_tag "entry[value]", to_number(entry.value) || (params[:entry][:date] if params[:entry]), :alt => "signed-decimal", :class => "value #{'error' if entry.errors[:value]}", :title => entry.errors[:value] %></td>
+    <td class="center"><%= check_box_tag "entry[paid]", true, entry.paid %></td>
+    <td><%= select_tag("entry[category_id]", grouped_options_for_select(@categories.collect {|r| [r.name,  r.children.collect { |c| [ "» #{c.name}", c.id]} ]}, entry.category_id, "Sem categoria"), :class => "#{'error' if entry.errors[:category]}", :title => entry.errors[:category], :style => "width: 100% !important") %></td>
+    <td><%= text_field_tag "entry[description]", entry.description, :class => "description #{'error' if entry.errors[:description]}", :title => entry.errors[:description] %></td>
+    <td class="right">
+      <span class="actions">
+        <% if entry.new_record? %>
+          <%= submit_to_remote "save_btn", "ok", :url => account_entries_path(:account_id => params[:account_id]), :method => "post" %>  
+          <%= link_to "cancelar", "#", :onclick => "$('#entry-new').fadeOut('fast', function(elem) { $(elem).remove(); }); return false;" %>
+        <% else %>
+          <%= submit_to_remote "save_btn", "ok", :url => account_entry_path(:account_id => params[:account_id], :id => entry.id), :method => "put" %>
+          <%= link_to_remote "cancelar", :method => "get", :url => account_entry_path(:account_id => params[:account_id], :id => entry.id) %>
+        <% end %>
+      </span>
+    </td>
+  </tr>

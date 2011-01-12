@@ -1,0 +1,10 @@
+  <div class="secondary-navigation">
+    <ul>
+      <li class="first <%= 'active' if ['index'].include?(action_name) %>"><%= link_to "Geral", overview_path %></li>
+<!--      <li class="first <%= 'active' if ['monthly'].include?(action_name) %>"><%= link_to "Lançamentos", overview_path(:action => "monthly") %></li> -->
+      <li class="first <%= 'active' if ['account'].include?(action_name) %>"><%= link_to "Por conta", overview_path(:action => "account") %></li>
+      <li class="<%= 'active' if action_name == 'category' %>"><%= link_to "Por categoria", overview_path(:action => "category") %></li>
+      <li class="<%= 'active' if action_name == 'graficos' %>"><%= link_to "Gráficos", overview_path(:action => "graficos") %></li>
+    </ul>
+    <div class="clear"></div>
+  </div>  

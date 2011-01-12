@@ -1,0 +1,5 @@
+log/*
+tmp/*
+config/database.yml
+config/email.yml
+db/schema.rb

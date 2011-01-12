@@ -1,0 +1,16 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+bank:
+  name: Bank Account
+  balance: 100
+  user: admin
+
+card:
+  name: Credit Card
+  balance: 0
+  user: admin
+
+money:
+  name: Live Money
+  balance: 50
+  user: admin

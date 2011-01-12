@@ -1,0 +1,32 @@
+<% content_for :title, "Lançamentos de #{Date.today.year} agrupador por Categoria" %>
+
+<div class="block">
+  <%= render :partial => "navigation" %>
+  <div class="content">          
+    <div class="inner">
+      <table class="table">
+        <thead>
+          <th>Categoria</th>
+          <% @months.each do |month| %>
+            <th class="right"><%= l(month, :format => "month") %></th>
+          <% end %>
+        </thead>
+        <% @categories.each do |category| -%>
+          <%= render :partial => "category_balance", :locals => {:category => category, :expand => false} %>
+        <% end %>
+<!--
+        <tfoot>
+          <td><b>TOTAIS</b></td>
+          <% @months.each do |month| %>
+            <td class="right"><b><%= to_currency(@totals[month]) %></b></td>
+          <% end %>
+        </tfoot>
+-->
+      </table>
+      <div class="actions-bar">
+        <div class="actions"></div>
+        <div class="clear"></div>
+      </div>
+    </div>
+  </div>
+</div>

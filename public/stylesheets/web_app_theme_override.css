@@ -1,0 +1,67 @@
+/* Override here any style definide by web-app-theme */
+#container {
+  min-width: 1024px;
+}
+#main {  
+  width: 73%;
+}
+#sidebar {
+  width: 25%;
+}
+
+.message {
+  padding: 10px;
+}
+.message ul {
+  list-style-type: none;
+}
+#footer a, #entries th a {
+  color: white;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+#user-navigation ul li.active {
+  font-weight: bold;
+  color: #FFF;
+}
+
+.table tr {
+  background-color: #fff;
+}
+
+.table thead th {
+  background-color: #1A1A1A;
+}
+
+.table th.first {
+  width: auto !important;
+}
+
+.table th.last {
+  width: auto !important;
+}
+
+.large {
+  font-size: 14px;
+}
+
+#sidebar .block {
+  margin-bottom: 20px;
+  padding-bottom: 0px;
+}
+#sidebar .table {
+  margin-bottom: 0px;
+}
+
+#main-navigation a {
+  text-transform: uppercase;
+}
+
+#footer {
+  margin: 20px;
+  text-align: center;
+  padding-bottom: 0px;
+}

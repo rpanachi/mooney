@@ -1,0 +1,61 @@
+<% content_for :title, "Meus dados" %>
+
+<div class="block">
+  <%= render (:partial => "users/navigation") %>
+  <div class="content">          
+    <div class="inner">
+      <br/>
+      <div class="flash">
+        <%= error_messages_for :user, :header_message => false, :message => false, :header_tag => false, :class => "message error" %>
+      </div>
+      <% form_for(@user, :url => user_path(@user), :method => "put", :html => {:class => "form"}) do |f| %>
+        <div class="group">
+          <div class="left">
+          	<label class="label right">Nome</label>
+          </div>
+          <div class="right">
+          	<%= f.text_field :name, :class => "text_field small" %>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div class="group">
+          <div class="left">
+          	<label class="label right">Email</label>
+          </div>
+          <div class="right">
+          	<%= f.text_field :email, :class => "text_field small", :disabled => true %>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <br/>
+        <hr/>
+        <br/>
+        <div class="group">
+          <div class="left">
+          	<label class="label right">Nova senha</label>
+          </div>
+          <div class="right">
+          	<%= f.password_field :password, :class => "text_field small"%>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div class="group">
+          <div class="left">
+          	<label class="label right">Repetir senha</label>
+          </div>
+          <div class="right">
+          	<%= f.password_field :password_confirmation, :class => "text_field small"%>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div class="group navform">
+          <div class="right">
+            <%= f.submit "Atualizar &rarr;", :class => "button" %>
+            <div class="clear"></div>
+          </div>
+          <div class="clear"></div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<% content_for :title, "Exportar dados" %>
+
+<div class="block">
+  <%= render (:partial => "users/navigation") %>
+  <div class="content">          
+    <div class="inner">
+      <br/>
+      <div class="flash">
+        <%= error_messages_for :user, :header_message => false, :message => false, :header_tag => false, :class => "message error" %>
+      </div>
+      <% form_tag user_export_path(current_user), :class => "form" do %>
+        <div class="block">
+          <h4>Você pode exportar todos seus lançamentos para o formato <a href="http://pt.wikipedia.org/wiki/Comma-separated_values">CSV</a></h4>
+          <br/>
+          <%= submit_tag "Exportar meus dados!", :class => "button" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

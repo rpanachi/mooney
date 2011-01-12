@@ -1,0 +1,28 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  account: bank
+  category: gifts
+  date: 2009-12-31
+  value: 5.50
+  description: Pants
+  paid: true
+  user: admin
+
+two:
+  account: bank
+  category: coke
+  date: 2009-12-31
+  value: -5.50
+  description: Fast-food
+  paid: true
+  user: admin
+
+three:
+  account: bank
+  category: hotdog
+  date: 2009-12-31
+  value: -15.00
+  description: Coffe
+  paid: false
+  user: admin

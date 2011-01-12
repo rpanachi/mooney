@@ -1,0 +1,21 @@
+# Outgoing email settings
+
+production:
+  delivery_method: :smtp
+  smtp_settings:
+    address: smtp.server.com
+    port: 587
+    domain: server.com
+    authentication: :login
+    user_name: user@server.com
+    password: password
+
+production:
+  delivery_method: :smtp
+  smtp_settings:
+    address: smtp.server.com
+    port: 587
+    domain: server.com
+    authentication: :login
+    user_name: user@server.com
+    password: password

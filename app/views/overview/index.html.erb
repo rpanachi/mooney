@@ -1,0 +1,76 @@
+<% content_for :title, "Resumo geral de lançamentos no mês de #{l @date, :format => '%B/%Y'}" %>
+
+<div class="block">
+  <%= render :partial => "navigation" %>
+  <div id="panel" class="content">
+
+    <% if @pending_entries && !@pending_entries.empty? || @recent_entries && !@recent_entries.empty? %>
+
+      <% if @pending_entries && !@pending_entries.empty? %>
+        <div class="inner">
+          <h2 class="title">Lançamentos pendentes</h2>
+          <table class="table">
+            <thead>             
+					    <th class="first"><%= "Conta" -%></th>
+					    <th><%= "Categoria" -%></th>
+					    <th><%= "Descrição" -%></th>
+					    <th><%= "Data" -%></th>
+					    <th class="right"><%= "Valor" -%></th>
+					    <th class="last center"><%= "Pago?" -%></th>
+            </thead>
+            <% @pending_entries.each do |entry| %>
+              <tr class="<%= pay_status(entry) -%>">
+				        <td><b><%= link_to entry.account.name, account_entries_path(entry.account) -%></b></td>
+                <td><%= entry.category ? "#{entry.category.parent ? entry.category.parent.name : ''} &rsaquo; #{entry.category.name}" : "&lsaquo; nenhuma &rsaquo;" -%></td>
+                <td><%= entry.description -%></td>
+                <td><%= l entry.date -%></td>
+                <td class="right"><%= to_currency(entry.value) -%></td>
+                <td class="center"><%= entry.paid ? "Sim" : "Não" -%></td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+      <% end %>
+
+      <% if @recent_entries && !@recent_entries.empty? %>
+        <div class="inner">
+          <h2 class="title">Lançamentos recentes</h2>
+          <table class="table">
+            <thead>             
+					    <th class="first"><%= "Conta" -%></th>
+					    <th><%= "Categoria" -%></th>
+					    <th><%= "Descrição" -%></th>
+					    <th><%= "Data" -%></th>
+					    <th class="right"><%= "Valor" -%></th>
+					    <th class="last center"><%= "Pago?" -%></th>
+            </thead>
+            <% @recent_entries.each do |entry| %>
+              <tr class="<%= pay_status(entry) -%>">
+				        <td><b><%= link_to entry.account.name, account_entries_path(entry.account) -%></b></td>
+                <td><%= entry.category ? "#{entry.category.parent ? entry.category.parent.name : ''} &rsaquo; #{entry.category.name}" : "&lsaquo; nenhuma &rsaquo;" -%></td>
+                <td><%= entry.description -%></td>
+                <td><%= l entry.date -%></td>
+                <td class="right"><%= to_currency(entry.value) -%></td>
+                <td class="center"><%= entry.paid ? "Sim" : "Não" -%></td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+      <% end %>
+
+    <% else %>
+
+      <div class="inner">
+        <h2 class="title">Começando com o Mooney</h2>
+        <h4>Para começar a controlar seu dinheiro você <b>precisa</b> cadastrar suas <b>contas</b> e <b>categorias</b> (veja instruções ao lado). Uma vez cadastradas, basta clicar na <b>conta</b> (menu superior) onde deseja inserir o lançamento, clicar no link "novo" e preencher as informações.</h4>
+
+        <h2>Exemplo de utilização</h2>
+        <%= image_tag "screenshot.png", :width => "100%" %>
+      </div>
+
+    <% end %>
+
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'entries/sidebar') -%>
