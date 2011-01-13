@@ -14,6 +14,10 @@ class Entry < ActiveRecord::Base
     { :conditions => { :user_id => user.id, :account_id => account_id } }
   }
 
+  named_scope :expenses, lambda {
+    {:conditions => ["value < 0"]}
+  }
+
   belongs_to :user
   belongs_to :account
   belongs_to :category

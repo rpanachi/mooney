@@ -2,12 +2,51 @@
 
 <div class="block">
   <%= render :partial => "navigation" %>
-  <div class="content">          
-      <br/>
-      <br/>
-      <h4 style="text-align: center">Funcionalidade não disponível no momento</h4>
-      <br/>
-      <br/>
-    </p>
+  <div class="content" style="width: 800px; height: 400px; margin: 0pt auto;" id="div_chart">
   </div>
 </div>
+
+<%= javascript_include_tag 'highcharts' %>
+
+<script type="text/javascript">
+
+  var chart;
+  $(document).ready(function() {
+    chart = new Highcharts.Chart({
+      chart: {
+        renderTo: 'div_chart',
+        plotBackgroundColor: '#CFCFCF',
+        plotBorderWidth: null,
+        plotShadow: true
+      },
+      title: {
+        text: 'Despesas por categoria'
+      },
+      tooltip: {
+        formatter: function() {
+          return '<b>'+ this.point.name +'</b>: R$ '+ this.y;
+        }
+      },
+      plotOptions: {
+        pie: {
+          allowPointSelect: true,
+          cursor: 'pointer',
+          dataLabels: {
+            enabled: true,
+            color: '#000000',
+            connectorColor: '#000000',
+            formatter: function() {
+              return '<b>'+ this.point.name +'</b>: R$ '+ this.y;
+            }
+          }
+        }
+      },
+        series: [{
+        type: 'pie',
+        name: 'Despesas por categoria',
+        data: [<% @despesas.each do |categoria| %>['<%= categoria[0] %>', <%= categoria[1] %>],<% end if @despesas %>]
+      }]
+    });
+  });
+    
+</script>

@@ -45,6 +45,19 @@ class OverviewController < ApplicationController
     end    
   end
 
+  def graficos
+    expenses = Entry.expenses.from_user(current_user).in_month(Date.today).find(:all, :select => 'sum(value) as value, category_id', :group => 'category_id')
+    puts expenses.to_json
+    puts "-----------"
+
+    @despesas = []
+
+    expenses.each do |expense| 
+      puts expense.category_id
+      @despesas << [expense.category_id ? Category.find(expense.category_id).name : 'Nao categorizado', expense.value * -1]
+    end
+  end
+
   private
 
   def load_defaults

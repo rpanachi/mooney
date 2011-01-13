@@ -52,4 +52,10 @@ namespace :mooney do
 
   end
 
+  desc "Clear database for development tests"
+  task :cleardb => :environment do
+    Entry.delete_all
+    Account.delete_all
+  end
+
 end
