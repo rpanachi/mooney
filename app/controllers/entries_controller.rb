@@ -92,7 +92,6 @@ class EntriesController < ApplicationController
     end
   end
 
-
   def category_balance
     @date = get_date_or_today
     @category = Category.from_user(current_user).find(params[:category_id])
@@ -100,6 +99,12 @@ class EntriesController < ApplicationController
     render(:update) do |page|
       page.replace "category-balance-#{@category.id}", render(:partial => "category_balance", :locals => {:category => @category, :expand => params[:expand]})
       page.remove ".subcategory-balance-#{@category.id}" if !params[:expand]
+    end
+  end
+
+  def import
+    render(:update) do |page|
+      page.replace "entry-new", :partial => "import"
     end
   end
 
@@ -118,14 +123,6 @@ class EntriesController < ApplicationController
   end
 
   private
-
-  def to_date(str)
-    Date.strptime(str, "%d/%m/%Y") rescue nil
-  end
-
-  def to_number(str)
-    str.gsub(".", "").gsub(",", ".").to_f rescue nil
-  end
 
   def localize_params
     params[:entry][:date] = to_date(params[:entry][:date]) if params.include?(:entry) && params[:entry].include?(:date)

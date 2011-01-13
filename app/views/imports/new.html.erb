@@ -1,0 +1,18 @@
+<% content_for :title, "Importação de lançamentos" %>
+
+<div class="block">
+  <div class="content">          
+    <div class="inner">
+      <div class="block">
+        <h4>Cole seus lançamentos abaixo e clique em <strong>validar</strong>. Confira os dados e associações finalize clicando em <strong>importar!</strong></h4>
+      </div>
+      <% form_for :entries, :url => imports_path(:action => :create) do |f| %>
+        <%= text_area_tag :values, nil, :cols => 100 %>
+        <%= submit_to_remote "validate", "Validar", :url => imports_path(:action => :validate), :update => "entries" %>
+        <table id="entries" class="table">
+
+        </table>
+      <% end %>
+    </div>
+  </div>
+</div>

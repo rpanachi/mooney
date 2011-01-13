@@ -56,4 +56,11 @@ class ApplicationController < ActionController::Base
     session[:return_to] = nil
   end
 
+  def to_date(str)
+    Date.strptime(str, "%d/%m/%Y") rescue nil
+  end
+
+  def to_number(str)
+    str.gsub(".", "").gsub(",", ".").to_f rescue nil
+  end
 end

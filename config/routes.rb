@@ -27,6 +27,7 @@ ActionController::Routing::Routes.draw do |map|
   end
   map.entries_category_balance "/entries/category/:category_id/balance", :controller => "entries", :action => "category_balance"
   
+  map.imports "imports/:action.:format", :controller => "imports", :action => "new"
   map.overview "/overview/:action", :controller => "overview", :action => "index"
 
   map.root :controller => "overview"

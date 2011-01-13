@@ -1,8 +1,6 @@
 <% content_for :head do %>
-
   <%= stylesheet_link_tag "datePicker" %>
   <%= javascript_include_tag "date", "jquery.datePicker", "jquery.meiomask", "jquery.scrollTo", "mooney", "mooney.entries" %>
-
 <% end %>
 
 <% content_for :title, "Lançamentos para #{@account.name} no mês de #{l @date, :format => '%B/%Y'}" %>

@@ -1,0 +1,25 @@
+<table id="entries" border="0" class="table">
+  <tr>
+    <th>&nbsp;</th>
+    <% entries.first.size.times do |index|%>
+      <th>
+        <%= select_tag "fields[#{index}]", entry_attributes_options %>
+      </th>
+    <% end %>
+    <th>Categoria</th>
+  </tr>
+  <% entries.each_with_index do |entry, index| %>
+    <tr id="entry-#{index}" class="<%= cycle('odd', 'even') %>">
+      <td><%= check_box_tag "entries[#{index}][import]" %></td>
+      <% entry.each_with_index do |token, field| %>
+        <td>
+          <%= text_field_tag "entries[#{index}][#{field}]", token %>
+        </td>
+      <% end %>
+      <td>
+        <%= select_tag("entries[#{index}][category_id]", grouped_options_for_select(@categories.collect {|r| [r.name,  r.children.collect { |c| [ "» #{c.name}", c.id]} ]}, nil, "Sem categoria") ) %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+<%= submit_to_remote "import", "Importar!", :url => imports_path(:action => :import) %>
