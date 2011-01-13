@@ -36,7 +36,7 @@ namespace :mooney do
       raise "No user found"
     end
 
-    FasterCSV.foreach(file, :col_sep =>';', :quote_char => '"', :row_sep => :auto, :headers => true) do |row|
+    FasterCSV.foreach(file, :col_sep =>';', :quote_char => "'", :row_sep => :auto, :headers => true) do |row|
       conta = row['CONTA']
       data = row['DATA']
       account = Account.find_by_name_and_user_id(conta, user.id)
