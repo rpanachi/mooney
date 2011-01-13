@@ -6,6 +6,7 @@ group :development, :test do
   gem 'mongrel', :require => false
   gem "sqlite3-ruby", "= 1.3.1", :require => "sqlite3"
   gem "capistrano" 
+  gem "fastercsv"
 end
 
 group :production do 
