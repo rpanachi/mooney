@@ -1,6 +1,6 @@
 class Entry < ActiveRecord::Base
 
-  default_scope :order => "date, id"
+  default_scope :order => "entries.date, entries.id"
 
   named_scope :from_user, lambda { |user|
     { :conditions => { :user_id => user.id } }
