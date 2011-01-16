@@ -45,16 +45,13 @@ class OverviewController < ApplicationController
     end    
   end
 
-  def graphics
+  def charts
     expenses = Entry.expenses.from_user(current_user).in_month(Date.today).find(:all,
-      :select => 'sum(entries.value) as value, entries.category_id', :group => 'entries.category_id',
-      :include => :category, :joins => :category, :order => "categories.parent_id")
+      :select => 'sum(entries.value) as value, entries.category_id', :group => 'categories.parent_id',
+      :include => :category, :joins => :category, :order => "value, categories.parent_id")
 
-    puts expenses.to_json
-    puts "-----------"
-
-    @despesas= expenses.map do |expense| 
-      ["#{expense.category.parent.name} / #{expense.category.name}", expense.value.abs.round(2)]
+    @data = expenses.map do |expense| 
+      ["#{expense.category.parent.name}", expense.value.abs.round(2)]
     end
   end
 

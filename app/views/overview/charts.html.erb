@@ -44,7 +44,7 @@
         series: [{
         type: 'pie',
         name: 'Despesas por categoria no mes atual',
-        data: [<% @despesas.each do |categoria| %>['<%= categoria[0] %>', <%= categoria[1] %>],<% end if @despesas %>]
+        data: [<% @data.each do |categoria| %>['<%= categoria[0] %>', <%= categoria[1] %>],<% end if @data %>]
       }]
     });
   });
