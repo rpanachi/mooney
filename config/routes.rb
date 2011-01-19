@@ -18,7 +18,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.create_categories_defaults "/categories/create_defaults", :controller => "categories", :action => "create_defaults"
   map.resources :categories do |category|
-    category.connect "/:action", :controller => "categories", :action => "account"
+    category.up "up", :controller => :categories, :action => :up
+    category.down "down", :controller => :categories, :action => :down
   end
 
   map.create_accounts_defaults "/accounts/create_defaults", :controller => "accounts", :action => "create_defaults"
