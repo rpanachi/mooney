@@ -146,3 +146,11 @@ a.button:hover {
   -moz-border-radius: 5px; 
   -webkit-border-radius: 5px
 }
+
+table tr.even:hover {
+  background-color: #D7D7D7;
+}
+
+table tr.odd:hover {
+  background-color: #F7F7F7;
+}
