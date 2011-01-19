@@ -60,7 +60,7 @@ class UsersController < ApplicationController
   
     report = StringIO.new
     CSV::Writer.generate(report, ';') do |csv|
-      csv << ['\'ID\'', '\'CONTA\'', '\'CATEGORIA\'', '\'DESCRICAO\'', '\'DATA\'', '\'VALOR\'', '\'PAGO\'']
+      csv << ['\'ID\'', '\'CONTA\'', '\'CATEGORIA\'', '\'DESCRICAO\'', '\'DATA\'', '\'VALOR\'', '\'PAGO\'','\'CATEGORIA PAI\'']
       @entries.each do |entry|
         record = [entry.id]
         record << ("\'#{entry.account.name.gsub(";", "") rescue ''}\'")
@@ -69,6 +69,7 @@ class UsersController < ApplicationController
         record << ("\'#{l(entry.date, :format => '%d/%m/%Y') rescue ''}\'")
         record << (entry.value.to_f rescue '')
         record << ("\'#{(entry.paid ? 'S' : 'N')}\'")
+        record << ("\'#{entry.category.parent.name rescue ''}\'")        
         csv << record
       end
     end

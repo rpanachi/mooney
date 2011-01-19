@@ -39,14 +39,42 @@ namespace :mooney do
     FasterCSV.foreach(file, :col_sep =>';', :quote_char => "'", :row_sep => :auto, :headers => true) do |row|
       conta = row['CONTA']
       data = row['DATA']
+      categoria = row['CATEGORIA']
+      categoria_pai = row['CATEGORIA PAI']
+
+      puts row.to_json
+      puts "#{categoria_pai}/#{categoria}"
+
       account = Account.find_by_name_and_user_id(conta, user.id)
       unless account
-        puts "#{conta} does not exist - adding"
+        puts "Account '#{conta}' does not exist - adding"
         account = Account.new(:name => conta, :user => user)
         account.save
       end
 
-      entry = Entry.new(:account => account, :date => Date.strptime(data, '%d/%m/%Y'), :description => row['DESCRICAO'], :value => row['VALOR'], :paid => row['PAGO'] == 'S', :user => user)
+      parent_category = categoria_pai ? Category.find_by_name(categoria_pai) : nil
+
+      category = Category.find(:first, :conditions => ['name = ? and parent_id = ?', categoria, parent_category ? parent_category.id : 0])
+
+      puts category.to_json
+
+      if category.nil? && !categoria.nil?
+        parent = nil
+
+        if parent_category
+          parent = Category.new(:parent_id => 0, :user => user, :name => categoria_pai)
+          parent.save
+          puts "Parent category #{categoria_pai} does not exist - adding"
+        end
+
+        category = Category.new(:parent_id => parent ? parent.id : 0, :user => user, :name => categoria)
+        if category.save
+          puts "Category #{categoria} does not exist - adding"
+        end
+
+      end
+
+      entry = Entry.new(:account => account, :date => Date.strptime(data, '%d/%m/%Y'), :description => row['DESCRICAO'], :value => row['VALOR'], :paid => row['PAGO'] == 'S', :user => user, :category => category)
       entry.save
     end
 
