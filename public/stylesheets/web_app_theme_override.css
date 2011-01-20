@@ -65,3 +65,7 @@ a:hover {
   text-align: center;
   padding-bottom: 0px;
 }
+
+.form input {
+  vertical-align: middle;
+}
