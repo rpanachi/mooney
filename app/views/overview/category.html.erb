@@ -8,7 +8,7 @@
         <thead>
           <th>Categoria</th>
           <% @months.each do |month| %>
-            <th class="right"><%= l(month, :format => "month") %></th>
+            <th class="right"><%= l(month, :format => :month) %></th>
           <% end %>
         </thead>
         <% @categories.each do |category| -%>
