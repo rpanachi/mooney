@@ -1,6 +1,7 @@
 source :gemcutter
 gem 'rails', '~> 2.3.10'
 gem 'authlogic', '~> 2.1.6'
+gem 'haml', '~> 3.0.25'
 
 group :development, :test do
   gem 'mongrel', :require => false
