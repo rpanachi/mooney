@@ -1,0 +1,14 @@
+.block
+  .secondary-navigation
+    %ul
+      %li.first= link_to 'Lista', accounts_path
+      %li= link_to 'Nova', new_account_path
+      %li.active= link_to 'Editar', edit_account_path
+    .clear
+  .content
+    %br
+    .inner
+      .flash
+        =error_messages_for :account, :header_message => false, :message => false, :header_tag => false, :class => "message error"
+      -form_for @account, :url => account_path(@account), :html => { :class => :form } do |f|
+        = render :partial => "form", :locals => {:f => f}
