@@ -1,0 +1,15 @@
+#user-navigation
+  %ul
+    %li{:class => controller.controller_name == 'categories' ? 'active' : ''}= link_to "Categorias", categories_url
+    %li{:class => controller.controller_name == 'accounts' ? 'active' : ''}= link_to "Contas", accounts_url
+    %li{:class => controller.controller_name == 'users' ? 'active' : ''}= link_to "Configurações", edit_user_url(current_user)
+    %li
+      %a.logout{:href => "/logout"} Sair
+  .clear
+#main-navigation
+  %ul
+    %li{:class => controller.controller_name == 'overview' ? 'active' : ''}= link_to "RESUMO", overview_path
+    - if @accounts
+      - for account in @accounts do
+        %li{:class => account == @account ? 'active' : ''}= link_to account.name, account_entries_path(account)
+  .clear

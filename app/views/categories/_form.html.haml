@@ -1,0 +1,11 @@
+- if @categories
+  .group
+    = f.label :name, "Categoria principal", :class => :label
+    = select(:category, :parent_id, @categories.collect {|c| [c.name, c.id] }.insert(0, ["--principal--", "0"]), {}, :class => "small")
+.group
+  = f.label :name, "Nome", :class => :label
+  = f.text_field :name, :class => 'text_field small'
+  %span.description Ex: transporte, alimentação, moradia
+.group.navform
+  %input.button{:type => "submit", :value => "Gravar &rarr;"}/
+  ou #{link_to 'cancelar', categories_path}

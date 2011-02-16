@@ -1,0 +1,41 @@
+- content_for :title, "Meus dados"
+.block
+  = render (:partial => "users/navigation")
+  .content
+    .inner
+      %br/
+      .flash
+        = error_messages_for :user, :header_message => false, :message => false, :header_tag => false, :class => "message error"
+      - form_for(@user, :url => user_path(@user), :method => "put", :html => {:class => "form"}) do |f|
+        .group
+          .left
+            %label.label.right Nome
+          .right
+            = f.text_field :name, :class => "text_field small"
+          .clear
+        .group
+          .left
+            %label.label.right Email
+          .right
+            = f.text_field :email, :class => "text_field small", :disabled => true
+          .clear
+        %br/
+        %hr/
+        %br/
+        .group
+          .left
+            %label.label.right Nova senha
+          .right
+            = f.password_field :password, :class => "text_field small"
+          .clear
+        .group
+          .left
+            %label.label.right Repetir senha
+          .right
+            = f.password_field :password_confirmation, :class => "text_field small"
+          .clear
+        .group.navform
+          .right
+            = f.submit "Atualizar &rarr;", :class => "button"
+            .clear
+          .clear

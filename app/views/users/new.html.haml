@@ -1,0 +1,42 @@
+#box
+  #block-signup.block
+    %h2 Cadastre-se no Mooney!
+    .content
+      - form_for @user, :url => signup_path, :html => {:class => "form"} do |f|
+        .flash
+          = error_messages_for :user, :header_message => false, :message => false, :header_tag => false, :class => "message error"
+        %br/
+        .group
+          .left
+            %label.label.right Email
+          .right
+            = f.text_field :email, :class => "text_field"
+          .clear
+        .group
+          .left
+            %label.label.right Senha
+          .right
+            = f.password_field :password, :class => "text_field"
+          .clear
+        .group
+          .left
+            %nobr/
+            %label.label.right Repetir senha
+          .right
+            = f.password_field :password_confirmation, :class => "text_field"
+          .clear
+        .group
+          .right
+            = hidden_field_tag "user[terms_of_service]", 0
+            %label.label
+              = check_box_tag "user[terms_of_service]", 1, false
+              \&nbsp;&nbsp;Li e aceito os
+              %a{:href => "/terms_and_conditions_of_use.html", :target => "_blank"} Termos e Condições de Uso
+          .clear
+        .group.navform
+          .right
+            = f.submit "Cadastrar &rarr;", :class => "button"
+            ou
+            \#{link_to "voltar", login_path}
+            .clear
+          .clear

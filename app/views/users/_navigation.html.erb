@@ -1,8 +1,0 @@
-  <div class="secondary-navigation">
-    <ul>
-      <li class="first <%= 'active' if ['edit', 'update'].include?(action_name) %>"><%= link_to "Minhas informações", edit_user_url(current_user) %></a></li>
-      <li class="<%= 'active' if ['confirm_export', 'export'].include?(action_name) %>"><%= link_to "Meus dados", user_export_path(:user_id => current_user.id) %></li>
-      <li class="last <%= 'active' if ['confirm_destroy', 'destroy'].include?(action_name) %>"><%= link_to "Excluir conta", user_delete_account_path(:user_id => current_user.id) %></li>
-    </ul>
-    <div class="clear"></div>
-  </div>

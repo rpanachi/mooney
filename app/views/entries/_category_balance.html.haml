@@ -1,0 +1,18 @@
+%tr.even{:id => "category-balance-#{category.id}"}
+  %td
+    = link_to_remote image_tag("#{expand ? 'collapse.gif' : 'expand.gif'}"), :url => {:controller => "entries", :action => "category_balance", :category_id => category.id, :date => l(@date, :format => "%m/%Y"), :expand => !expand }, :after => "$(this).replaceWith('&nbsp;&nbsp;&nbsp;')"
+    \&nbsp;&nbsp;
+    %b= category.name
+  %td.right
+    = to_currency(category.balance_in_month(@date))
+  %td.right
+    = to_currency(category.pending_in_month(@date))
+- if expand
+  - category.children.each do |subcategory|
+    %tr{:class => "odd subcategory-balance-#{category.id}"}
+      %td
+        \&nbsp;#{image_tag("arrow-right.png")}&nbsp;&nbsp;#{subcategory.name}
+      %td.right
+        = to_currency(subcategory.balance_in_month(@date))
+      %td.right
+        = to_currency(subcategory.pending_in_month(@date))
