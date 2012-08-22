@@ -5,10 +5,11 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :confirmable
+         :recoverable, :rememberable, :trackable, :validatable,
+         :confirmable, :encryptable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :name
 
   has_many :accounts,   :dependent => :destroy
   has_many :categories, :dependent => :destroy
@@ -32,33 +33,6 @@ class User < ActiveRecord::Base
       end
     end
     Rails.logger.info "Categories sucessfully created for user #{id} => #{email}"
-  end
-
-  def activate!
-    self.update_attribute(:confirmed_at, Time.now)
-    Mailer.deliver_admin_user_activated(self)
-  end
-
-  def active?
-    !(self.new_record? || self.confirmed_at.nil?)
-  end
-
-  def has_credentials?
-    !!crypted_password
-  end
-
-  def send_activation_instructions
-    self.reset_perishable_token
-    self.confirmed_at = nil
-    self.confirmation_sent_at = Time.now
-    self.save(false)
-    Mailer.deliver_activation_instructions(self)
-  end
-
-  def send_password_reset_instructions
-    self.reset_perishable_token
-    self.save(false)
-    Mailer.deliver_password_reset_instructions(self)
   end
 
 end

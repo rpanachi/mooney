@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(:version => 20120822000827) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name",       :limit => 50
-    t.decimal  "balance",                  :precision => 10, :scale => 2, :default => 0.0
+    t.decimal  "balance",                  :precision => 8, :scale => 2, :default => 0.0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
@@ -57,8 +57,10 @@ ActiveRecord::Schema.define(:version => 20120822000827) do
   create_table "users", :force => true do |t|
     t.string   "email"
     t.string   "encrypted_password"
+    t.string   "password_salt"
     t.string   "reset_password_token"
     t.integer  "sign_in_count"
+    t.datetime "last_request_at"
     t.datetime "last_sign_in_at"
     t.datetime "current_sign_in_at"
     t.string   "last_sign_in_ip"
@@ -75,6 +77,7 @@ ActiveRecord::Schema.define(:version => 20120822000827) do
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["last_request_at"], :name => "index_users_on_last_request_at"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end
