@@ -1,3 +1,4 @@
+#encoding: UTF-8
 class EntryObserver < ActiveRecord::Observer
 
   observe :entry
@@ -10,7 +11,7 @@ class EntryObserver < ActiveRecord::Observer
     cancels_account_balance(entry)
   end
 
-  protected 
+  protected
 
   #TODO as vezes, usar TDD deixa o codigo meio confuso #LOL
   def update_account_balance(entry)
@@ -38,7 +39,7 @@ class EntryObserver < ActiveRecord::Observer
 
     if entry.changed?
 
-      RAILS_DEFAULT_LOGGER.debug("Entry saved: updating account[#{entry.account.id}] balance from [#{entry.account.balance}] to [#{current_balance}]")
+      Rails.logger.debug("Entry saved: updating account[#{entry.account.id}] balance from [#{entry.account.balance}] to [#{current_balance}]")
 
       entry.account.balance = current_balance
       entry.account.save
@@ -55,7 +56,7 @@ class EntryObserver < ActiveRecord::Observer
       current_balance = entry.account.balance
       current_balance += value * -1
 
-      RAILS_DEFAULT_LOGGER.debug("Entry destroyed: updating account[#{entry.account.id}] balance from [#{entry.account.balance}] to [#{current_balance}]")
+      Rails.logger.debug("Entry destroyed: updating account[#{entry.account.id}] balance from [#{entry.account.balance}] to [#{current_balance}]")
 
       entry.account.balance = current_balance
       entry.account.save

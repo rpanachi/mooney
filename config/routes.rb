@@ -1,35 +1,58 @@
-ActionController::Routing::Routes.draw do |map|
+Mooney::Application.routes.draw do
+  # The priority is based upon order of creation:
+  # first created -> highest priority.
 
-  map.resources :passwords, :controller => "user_passwords"
+  # Sample of regular route:
+  #   match 'products/:id' => 'catalog#view'
+  # Keep in mind you can assign values other than :controller and :action
 
-  map.signup "/signup", :controller => "users", :action => "create", :conditions => { :method => :post}
-  map.signup "/signup", :controller => "users", :action => "new", :conditions => { :method => :get}
-  map.activation "/users/activate/:token", :controller => "users", :action => "activate"
-  map.resources :users do |user|
-    user.delete_account "/destroy", :controller => "users", :action => "confirm_destroy", :conditions => { :method => :get }
-    user.delete_account "/destroy", :controller => "users", :action => "destroy", :conditions => { :method => :post }
-    user.export "/export", :controller => "users", :action => "confirm_export", :conditions => { :method => :get }
-    user.export "/export", :controller => "users", :action => "export", :conditions => { :method => :post }
-  end
+  # Sample of named route:
+  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
+  # This route can be invoked with purchase_url(:id => product.id)
 
-  map.login "/login", :controller => "user_sessions", :action => "create", :conditions => { :method => :post}
-  map.login "/login", :controller => "user_sessions", :action => "new", :conditions => { :method => :get}
-  map.logout "/logout", :controller => "user_sessions", :action => "destroy"
+  # Sample resource route (maps HTTP verbs to controller actions automatically):
+  #   resources :products
 
-  map.create_categories_defaults "/categories/create_defaults", :controller => "categories", :action => "create_defaults"
-  map.resources :categories do |category|
-    category.up "up", :controller => :categories, :action => :up
-    category.down "down", :controller => :categories, :action => :down
-  end
+  # Sample resource route with options:
+  #   resources :products do
+  #     member do
+  #       get 'short'
+  #       post 'toggle'
+  #     end
+  #
+  #     collection do
+  #       get 'sold'
+  #     end
+  #   end
 
-  map.create_accounts_defaults "/accounts/create_defaults", :controller => "accounts", :action => "create_defaults"
-  map.resources :accounts do |accounts|
-    accounts.resources :entries
-  end
-  map.entries_category_balance "/entries/category/:category_id/balance", :controller => "entries", :action => "category_balance"
-  
-  map.overview "/overview/:action", :controller => "overview", :action => "index"
+  # Sample resource route with sub-resources:
+  #   resources :products do
+  #     resources :comments, :sales
+  #     resource :seller
+  #   end
 
-  map.root :controller => "overview"
+  # Sample resource route with more complex sub-resources
+  #   resources :products do
+  #     resources :comments
+  #     resources :sales do
+  #       get 'recent', :on => :collection
+  #     end
+  #   end
 
+  # Sample resource route within a namespace:
+  #   namespace :admin do
+  #     # Directs /admin/products/* to Admin::ProductsController
+  #     # (app/controllers/admin/products_controller.rb)
+  #     resources :products
+  #   end
+
+  # You can have the root of your site routed with "root"
+  # just remember to delete public/index.html.
+  # root :to => 'welcome#index'
+
+  # See how all your routes lay out with "rake routes"
+
+  # This is a legacy wild controller route that's not recommended for RESTful applications.
+  # Note: This route will make all actions in every controller accessible via GET requests.
+  # match ':controller(/:action(/:id))(.:format)'
 end

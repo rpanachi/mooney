@@ -1,9 +1,10 @@
+#encoding: UTF-8
 class Account < ActiveRecord::Base
 
   DEFAULT_ACCOUNTS = ["Dinheiro", "Conta Corrente", "Cartão de Crédito"]
 
-  named_scope :from_user, lambda { |user|
-    { :conditions => { :user_id => user.id } }
+  scope :from_user, lambda { |user|
+    where("user_id = ?", user)
   }
 
   validates_presence_of :user
@@ -40,5 +41,5 @@ class Account < ActiveRecord::Base
   def destroy_entries
     Entry.from_user_and_account(user, id).destroy_all
   end
-  
+
 end

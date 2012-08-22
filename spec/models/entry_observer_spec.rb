@@ -30,7 +30,7 @@ describe EntryObserver do
 
     @entry.value = 10.50 #5.50 to 10.50
     @entry.save #update
-  
+
     accounts(:bank).balance.should == 105.00
 
   end
@@ -41,7 +41,7 @@ describe EntryObserver do
 
     @entry.value = -10.50 #-5.50 to -10.50
     @entry.save #update
-  
+
     accounts(:bank).balance.should == 95.00
 
   end

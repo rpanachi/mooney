@@ -1,134 +1,241 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-<head>
-	<title>Mooney - controle financeiro pessoal simples, rápido e seguro</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="description" content="Quer controlar seu dinheiro? O Mooney é um controlador financeiro pessoal simples, rápido, seguro e grátis!">
-  <link rel="stylesheet" href="stylesheets/home.css" type="text/css" media="screen">
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $(".feature").each(function(index, feature) {
-        $(feature).mouseover(function() {
-          $("#desc-feature-" + $(feature).attr("id").split("-")[1]).addClass("hover");
-        })
-        $(feature).mouseleave(function() {
-          $("#desc-feature-" + $(feature).attr("id").split("-")[1]).removeClass("hover");
-        })
-      });
-    });
-  </script>
-</head>
-<body>
-  <div id="container">
-    <div id="header">
-      <div id="inner">
-        <h1><a href="">Mooney!</a></h1>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ruby on Rails: Welcome aboard</title>
+    <style type="text/css" media="screen">
+      body {
+        margin: 0;
+        margin-bottom: 25px;
+        padding: 0;
+        background-color: #f0f0f0;
+        font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana";
+        font-size: 13px;
+        color: #333;
+      }
 
-        <div id="user-navigation">
-          <ul class="wat-cf">
-            <li><a href="/login">ENTRAR</a></li>
-            <li><a href="/signup">CADASTRAR</a></li>
-          </ul>
-        </div>
+      h1 {
+        font-size: 28px;
+        color: #000;
+      }
 
+      a  {color: #03c}
+      a:hover {
+        background-color: #03c;
+        color: white;
+        text-decoration: none;
+      }
+
+
+      #page {
+        background-color: #f0f0f0;
+        width: 750px;
+        margin: 0;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      #content {
+        float: left;
+        background-color: white;
+        border: 3px solid #aaa;
+        border-top: none;
+        padding: 25px;
+        width: 500px;
+      }
+
+      #sidebar {
+        float: right;
+        width: 175px;
+      }
+
+      #footer {
+        clear: both;
+      }
+
+      #header, #about, #getting-started {
+        padding-left: 75px;
+        padding-right: 30px;
+      }
+
+
+      #header {
+        background-image: url("assets/rails.png");
+        background-repeat: no-repeat;
+        background-position: top left;
+        height: 64px;
+      }
+      #header h1, #header h2 {margin: 0}
+      #header h2 {
+        color: #888;
+        font-weight: normal;
+        font-size: 16px;
+      }
+
+
+      #about h3 {
+        margin: 0;
+        margin-bottom: 10px;
+        font-size: 14px;
+      }
+
+      #about-content {
+        background-color: #ffd;
+        border: 1px solid #fc0;
+        margin-left: -55px;
+        margin-right: -10px;
+      }
+      #about-content table {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-size: 11px;
+        border-collapse: collapse;
+      }
+      #about-content td {
+        padding: 10px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+      }
+      #about-content td.name  {color: #555}
+      #about-content td.value {color: #000}
+
+      #about-content ul {
+        padding: 0;
+        list-style-type: none;
+      }
+
+      #about-content.failure {
+        background-color: #fcc;
+        border: 1px solid #f00;
+      }
+      #about-content.failure p {
+        margin: 0;
+        padding: 10px;
+      }
+
+
+      #getting-started {
+        border-top: 1px solid #ccc;
+        margin-top: 25px;
+        padding-top: 15px;
+      }
+      #getting-started h1 {
+        margin: 0;
+        font-size: 20px;
+      }
+      #getting-started h2 {
+        margin: 0;
+        font-size: 14px;
+        font-weight: normal;
+        color: #333;
+        margin-bottom: 25px;
+      }
+      #getting-started ol {
+        margin-left: 0;
+        padding-left: 0;
+      }
+      #getting-started li {
+        font-size: 18px;
+        color: #888;
+        margin-bottom: 25px;
+      }
+      #getting-started li h2 {
+        margin: 0;
+        font-weight: normal;
+        font-size: 18px;
+        color: #333;
+      }
+      #getting-started li p {
+        color: #555;
+        font-size: 13px;
+      }
+
+
+      #sidebar ul {
+        margin-left: 0;
+        padding-left: 0;
+      }
+      #sidebar ul h3 {
+        margin-top: 25px;
+        font-size: 16px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ccc;
+      }
+      #sidebar li {
+        list-style-type: none;
+      }
+      #sidebar ul.links li {
+        margin-bottom: 5px;
+      }
+
+      .filename {
+        font-style: italic;
+      }
+    </style>
+    <script type="text/javascript">
+      function about() {
+        info = document.getElementById('about-content');
+        if (window.XMLHttpRequest)
+          { xhr = new XMLHttpRequest(); }
+        else
+          { xhr = new ActiveXObject("Microsoft.XMLHTTP"); }
+        xhr.open("GET","rails/info/properties",false);
+        xhr.send("");
+        info.innerHTML = xhr.responseText;
+        info.style.display = 'block'
+      }
+    </script>
+  </head>
+  <body>
+    <div id="page">
+      <div id="sidebar">
+        <ul id="sidebar-items">
+          <li>
+            <h3>Browse the documentation</h3>
+            <ul class="links">
+              <li><a href="http://guides.rubyonrails.org/">Rails Guides</a></li>
+              <li><a href="http://api.rubyonrails.org/">Rails API</a></li>
+              <li><a href="http://www.ruby-doc.org/core/">Ruby core</a></li>
+              <li><a href="http://www.ruby-doc.org/stdlib/">Ruby standard library</a></li>
+            </ul>
+          </li>
+        </ul>
       </div>
 
-      <div id="divisor" class="clear"></div>
-    </div>
-
-    <div id="main">
-      <div id="inner">
-
-        <div class="block">
-          <h2 class="title">Controle financeiro pessoal simples, rápido e seguro</h2>
-          <br/>
-          <div class="columns wat-cf">
-            <div id="problems-panel" class="column left">
-              <ul>
-                <li>Paguei em dinheiro ou no cheque?</li>
-                <li>Estou gastando muito no cartão?</li>
-                <li>Quanto gastei com meu carro este mês?</li>
-                <li>Não tenho paciência para usar uma planilha...</li>
-                <li>Legal, mas o que eu ganho com isso?</li>
-              </ul>
-            </div>
-            <div id="features-panel" class="column right">
-              <ul>
-                <li>Controle de várias contas</li>
-                <li>Totalizadores simplificados</li>
-                <li>Categorização eficiente</li>
-                <li>Interface intuitiva, simples e direta</li>
-                <li>Mobilidade, segurança e sigilo absoluto!</li>
-              </ul>
-            </div>
-          </div>
-          <hr></hr>
-          <div id="signup-panel">
-            <h1>
-              Quer controlar seu dinheiro?&nbsp;&nbsp;<a href="/signup" class="button">Cadastre-se já!</a>
-            </h1>
-          </div>
-          <div class="clear"></div>
+      <div id="content">
+        <div id="header">
+          <h1>Welcome aboard</h1>
+          <h2>You&rsquo;re riding Ruby on Rails!</h2>
         </div>
-      </div>
 
-      <br/><br/>
+        <div id="about">
+          <h3><a href="rails/info/properties" onclick="about(); return false">About your application&rsquo;s environment</a></h3>
+          <div id="about-content" style="display: none"></div>
+        </div>
 
-      </div id="inner">
-        <div id="tour">
-          <img src="images/screenshot_tour.png">
-            <div id="feature-1" class="feature">1</div>
-            <div id="feature-2" class="feature">2</div>
-            <div id="feature-3" class="feature">3</div>
-            <div id="feature-4" class="feature">4</div>
-            <div id="feature-5" class="feature">5</div>
-            <div id="feature-6" class="feature">6</div>
-            <div id="feature-7" class="feature">7</div>
-            <div id="feature-8" class="feature">8</div>
-            <div id="feature-9" class="feature">9</div>
-            <div id="feature-10" class="feature">10</div>
-          </img>
-          <ol type="1">
-            <li id="desc-feature-1">Acesso rápido aos lançamentos de cada conta</li>
-            <li id="desc-feature-2">Seleção rápida dos lançamentos por valor e situação de contabilização</li>
-            <li id="desc-feature-3">Edição e inserção de lançamentos simples e rápida</li>
-            <li id="desc-feature-4">Lançamentos não pagos e vencidos são sinalizados em vermelho</li>
-            <li id="desc-feature-5">Lançamentos não pagos ainda pendentes são sinalizados em verde</li>
-            <li id="desc-feature-6">Totalização dos lançamentos selecionados facilitando análises</li>
-            <li id="desc-feature-7">Indicação e edição rápida da situação dos lançamentos</li>
-            <li id="desc-feature-8">Navegação rápida entre os lançamentos de cada mês</li>
-            <li id="desc-feature-9">Resumo dos saldos atuais de cada conta incluindo a totalização dos valores pendentes</li>
-            <li id="desc-feature-10">Totalização dos lançamentos do mês agrupados por categoria e sub-categoria</li>
+        <div id="getting-started">
+          <h1>Getting started</h1>
+          <h2>Here&rsquo;s how to get rolling:</h2>
+
+          <ol>
+            <li>
+              <h2>Use <code>rails generate</code> to create your models and controllers</h2>
+              <p>To see all available options, run it without parameters.</p>
+            </li>
+
+            <li>
+              <h2>Set up a default route and remove <span class="filename">public/index.html</span></h2>
+              <p>Routes are set up in <span class="filename">config/routes.rb</span>.</p>
+            </li>
+
+            <li>
+              <h2>Create your database</h2>
+              <p>Run <code>rake db:create</code> to create your database. If you're not using SQLite (the default), edit <span class="filename">config/database.yml</span> with your username and password.</p>
+            </li>
           </ol>
         </div>
       </div>
-      <br/>
-      <div id="footer">
-        <div id="inner">
-          <div class="block">
-            <p>
-              Copyright &copy; 2010&nbsp;&nbsp;
-              <a href="http://1up4dev.org">1up4developers</a>&nbsp;&nbsp;·&nbsp;&nbsp;
-              <a href="/terms_and_conditions_of_use.html">Termos e Condições de Uso</a>&nbsp;&nbsp;·&nbsp;&nbsp;
-              <a href="/frequently_asked_questions.html">Perguntas Frequentes</a>&nbsp;&nbsp;·&nbsp;&nbsp;
-              <a href="mailto:mooney@1up4dev.com">Entre em Contato</a>
-            </p>
-          </div>      
-        </div>
-      </div>
 
+      <div id="footer">&nbsp;</div>
     </div>
-  </div>
-  <script type="text/javascript">
-    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-    </script>
-    <script type="text/javascript">
-    try {
-    var pageTracker = _gat._getTracker("UA-12887638-1");
-    pageTracker._trackPageview();
-    } catch(err) {}
-  </script>
-</body>
+  </body>
 </html>

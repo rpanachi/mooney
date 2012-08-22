@@ -1,20 +1,21 @@
+#encoding: UTF-8
 class Entry < ActiveRecord::Base
 
   default_scope :order => "entries.date, entries.id"
 
-  named_scope :from_user, lambda { |user|
+  scope :from_user, lambda { |user|
     { :conditions => { :user_id => user.id } }
   }
 
-  named_scope :in_month, lambda { |date|
+  scope :in_month, lambda { |date|
     { :conditions => ["date between ? and ?", date.beginning_of_month, date.end_of_month] }
   }
 
-  named_scope :from_user_and_account, lambda { |user, account_id|
+  scope :from_user_and_account, lambda { |user, account_id|
     { :conditions => { :user_id => user.id, :account_id => account_id } }
   }
 
-  named_scope :expenses, lambda {
+  scope :expenses, lambda {
     {:conditions => ["value < 0"]}
   }
 
@@ -26,6 +27,8 @@ class Entry < ActiveRecord::Base
   validates_presence_of :date, :message => "Informe a data do lançamento"
   validates_length_of :description, :maximum => 30, :allow_nil => true, :message => "Forneça uma descrição com no máximo 30 caracteres"
   validates_exclusion_of :value, :in => [0.0], :message => "Informe o valor do lançamento"
+
+  attr_accessible :value, :date, :paid, :user, :account, :category, :description
 
   def initialize(args = {})
     super({:paid => true}.merge(args))

@@ -1,3 +1,4 @@
+#encoding: UTF-8
 class Category < ActiveRecord::Base
 
   DEFAULT_CATEGORIES = [
@@ -19,12 +20,12 @@ class Category < ActiveRecord::Base
   belongs_to :parent, :class_name => name, :foreign_key => :parent_id
   has_many :children, :class_name => name, :foreign_key => :parent_id, :order => :position, :dependent => :destroy
 
-  named_scope :from_user, lambda { |user|
-    { :conditions => { :user_id => user.id } }
+  scope :from_user, lambda { |user|
+    where("user_id = ?", user)
   }
 
-  named_scope :roots, lambda {
-    { :conditions => ["parent_id = ?", 0], :order => :position }
+  scope :roots, lambda {
+    where("parent_id = ?", 0).order(:position)
   }
 
   #root categories with balance

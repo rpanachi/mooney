@@ -1,7 +1,4 @@
-log/*
-tmp/*
-config/database.yml
-config/email.yml
-db/schema.rb
-Gemfile.lock
-db/*.sqlite3
+/.bundle
+/log/*.log
+/tmp
+/config/*.yml

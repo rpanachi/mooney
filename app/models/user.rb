@@ -1,14 +1,9 @@
+#encoding: UTF-8
 class User < ActiveRecord::Base
 
-  acts_as_authentic do |authentication|
-    authentication.perishable_token_valid_for = 1.days
-  end
-
-  has_many :accounts, :dependent => :destroy
+  has_many :accounts,   :dependent => :destroy
   has_many :categories, :dependent => :destroy
-  has_many :entries, :dependent => :destroy
-
-  after_create :send_activation_instructions
+  has_many :entries,    :dependent => :destroy
 
   validates_acceptance_of :terms_of_service
 
@@ -16,7 +11,7 @@ class User < ActiveRecord::Base
     Account::DEFAULT_ACCOUNTS.each do |account_name|
       Account.new(:user => self, :name => account_name, :balance => 0.0).save
     end
-    RAILS_DEFAULT_LOGGER.info "Accounts sucessfully created for user #{id} => #{email}"
+    Rails.logger.info "Accounts sucessfully created for user #{id} => #{email}"
   end
 
   def load_categories
@@ -27,7 +22,7 @@ class User < ActiveRecord::Base
         Category.new(:name => child_name, :parent => root, :user => self, :position => child_index).save
       end
     end
-    RAILS_DEFAULT_LOGGER.info "Categories sucessfully created for user #{id} => #{email}"
+    Rails.logger.info "Categories sucessfully created for user #{id} => #{email}"
   end
 
   def activate!

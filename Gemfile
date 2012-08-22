@@ -1,17 +1,31 @@
-source :gemcutter
+source 'https://rubygems.org'
 
-gem 'rails', '~> 2.3.10'
-gem 'authlogic', '~> 2.1.6'
-gem 'haml', '~> 3.0.25'
+gem 'rails', '3.2.8'
+gem 'mysql2'
+gem 'jquery-rails'
+
+group :assets do
+  gem 'sass-rails',   '~> 3.2.3'
+  gem 'coffee-rails', '~> 3.2.1'
+  gem 'therubyracer', :platforms => :ruby
+  gem 'uglifier',     '>= 1.0.3'
+end
 
 group :development, :test do
-  gem 'mongrel', :require => false
-  gem 'cucumber-rails', '~> 0.3.2'
-  gem 'fastercsv'
-  gem 'capybara'
-  gem "mysql", "~> 2.8.1"
+  gem 'rspec-rails'
 end
 
-group :production do 
-  gem "mysql", "~> 2.8.1"
-end
+# To use ActiveModel has_secure_password
+# gem 'bcrypt-ruby', '~> 3.0.0'
+
+# To use Jbuilder templates for JSON
+# gem 'jbuilder'
+
+# Use unicorn as the app server
+# gem 'unicorn'
+
+# Deploy with Capistrano
+# gem 'capistrano'
+
+# To use debugger
+# gem 'debugger'
