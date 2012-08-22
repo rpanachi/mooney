@@ -1,4 +1,3 @@
 admin:
   email: admin@server.com
-  crypted_password: <%= "12345".crypt("md5") %>
-  login_count: 1
+  encrypted_password: <%= "12345".crypt("md5") %>
