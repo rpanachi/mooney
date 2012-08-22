@@ -1,0 +1,23 @@
+doctype html
+html lang="pt-br"
+  head
+    title Mooney - Finanças Pessoais
+    = stylesheet_link_tag    "application", :media => "all"
+    = csrf_meta_tags
+  body
+    .navbar.navbar-inverse.navbar-fixed-top
+      .navbar-inner
+        .container-fluid
+          = link_to "Mooney", "#", :class => "brand"
+
+    .container-fluid
+      = yield
+
+    footer
+      .container-fluid
+        .well
+          | Mooney - Finanças Pessoais #{Time.now.year}
+
+    = javascript_include_tag "application"
+    = javascript_tag do
+      = yield(:javascript)

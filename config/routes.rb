@@ -1,5 +1,7 @@
 Mooney::Application.routes.draw do
 
+  get "/recursos(/:action)", :to => "resources", :action => :index
+
   devise_for :users, :path => "usuarios"
 
   # The priority is based upon order of creation:
